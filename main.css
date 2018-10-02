@@ -1,3 +1,8 @@
 .ql-editor {
     height: 300px;;
 }
+
+#output * {
+    margin-top:0;
+    margin-bottom:0;
+}

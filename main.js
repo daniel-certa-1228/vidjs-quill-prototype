@@ -2,7 +2,6 @@
 console.log("main.js");
 
 
-
 var quill = new Quill('#editor-container', {
     modules: {
       syntax: false,
@@ -14,15 +13,21 @@ var quill = new Quill('#editor-container', {
 
   $('#saveDelta').click(function(){
       let delta = quill.getContents();
+    //   console.log(delta);
       let html = quill.root.innerHTML;
-      console.log("HTML\n" + html);
-      console.log(JSON.stringify(delta));
+        let json_delta = JSON.stringify(delta);
+        let new_delta = JSON.parse(json_delta);
       output(html);
-    quill.setContents("");
-      window.setTimeout(function(){
-        quill.setContents(delta);
-      }, 3000)
+      quill.setContents("");
+        console.log("HTML\n" + html);
 
+      window.setTimeout(function(){
+        quill.clipboard.dangerouslyPasteHTML(html);
+      }, 1000)
+
+      window.setTimeout(function(){
+        quill.setContents(new_delta);
+      }, 3000)
   });
 
   function output(html) {
